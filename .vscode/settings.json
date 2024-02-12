@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "filesystem": "cpp"
+        "filesystem": "cpp",
+        "fstream": "cpp",
+        "iostream": "cpp",
+        "string": "cpp"
     }
 }
