@@ -32,3 +32,13 @@ Go to the project directory
 - This will create a executable of main.cpp named 'vcs'.
 
 - Copy this executable where you want to use version-control-system
+
+## Behind the scenes of VCS
+```
+./vcs add <filename>
+```
+
+<div align="center">
+<img src="https://github.com/Rudra-IITM/version-control-system/blob/main/public/assets/vcs_add.png" align="center" style="width: 100%" />
+</div> 
+
