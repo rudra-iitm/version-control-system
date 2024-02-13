@@ -76,8 +76,8 @@ Displays the commit history of the project.
 </div> 
 
 - All functions operate based on the command line arguments.
-- This works by using <span style="color:red;">argc</span> & <span style="color:red;">*argv[]</span> in main function.
-- <span style="color:red;">argc</span> & <span style="color:red;">*argv[]</span> are how command line arguments are passed to main() in C and C++
+- This works by using ```argc``` & ```*argv[]``` in main function.
+- ```argc``` & ```*argv[]``` are how command line arguments are passed to main() in C and C++
 - With each commit, a new directory is created
 - and hence every time an instance of the program runs it iterates through linked list
 nodes created using directory paths.
