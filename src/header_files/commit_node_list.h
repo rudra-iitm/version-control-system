@@ -50,10 +50,10 @@ private:
     void createCommitNode()
     {
         // create a dir for new commit to store info about the commit
-        filesystem::create_directory(filesystem::current_path() / ".git" / "commits" / commitID);
+        filesystem::create_directory(filesystem::current_path() / ".vcs" / "commits" / commitID);
 
         // construct a path to file commitInfo.txt
-        auto path = filesystem::current_path() / ".git" / "commits" / commitID / "commitInfo.txt";
+        auto path = filesystem::current_path() / ".vcs" / "commits" / commitID / "commitInfo.txt";
 
         // write info about commit in commitInfo.txt
         ofstream write(path.string());
@@ -62,13 +62,13 @@ private:
                      "3." + get_time() + "\n";
 
         // construct a path for staging area
-        auto STAGING_AREA_PATH = filesystem::path(filesystem::current_path() / ".git" / "staging_area");
+        auto STAGING_AREA_PATH = filesystem::path(filesystem::current_path() / ".vcs" / "staging_area");
 
         // defines options for copying files
         const auto copyOptions = filesystem::copy_options::update_existing | filesystem::copy_options::recursive;
 
         // moving staged changes into the commit
-        filesystem::copy(STAGING_AREA_PATH, filesystem::current_path() / ".git" / "commits" / commitID / "Data", copyOptions);
+        filesystem::copy(STAGING_AREA_PATH, filesystem::current_path() / ".vcs" / "commits" / commitID / "Data", copyOptions);
     }
 
 public:
@@ -86,15 +86,15 @@ public:
 
     void revertCommitNode(string hash)
     {
-        filesystem::create_directories(filesystem::current_path() / ".git" / "commits" / getCommitID() / "Data");
-        auto nextCommitPath = filesystem::current_path() / ".git" / "commits" / getCommitID() / "commitInfo.txt";
-        auto copyFrom = filesystem::current_path() / ".git" / "commits" / hash / "Data";
+        filesystem::create_directories(filesystem::current_path() / ".vcs" / "commits" / getCommitID() / "Data");
+        auto nextCommitPath = filesystem::current_path() / ".vcs" / "commits" / getCommitID() / "commitInfo.txt";
+        auto copyFrom = filesystem::current_path() / ".vcs" / "commits" / hash / "Data";
         ofstream write(nextCommitPath.string());
         write << "1." + commitID + "\n" +
                      "2." + commitMsg + "\n" +
                      "3." + get_time() + "\n";
         const auto copyOptions = filesystem::copy_options::recursive;
-        filesystem::copy(copyFrom, filesystem::current_path() / ".git" / "commits" / getCommitID() / "Data", copyOptions);
+        filesystem::copy(copyFrom, filesystem::current_path() / ".vcs" / "commits" / getCommitID() / "Data", copyOptions);
     }
 
     void readNodeInfo()
@@ -102,7 +102,7 @@ public:
         string info;
 
         // construct a path to commitInfo.txt
-        auto path = filesystem::current_path() / ".git" / "commits" / getCommitID() / "commitInfo.txt";
+        auto path = filesystem::current_path() / ".vcs" / "commits" / getCommitID() / "commitInfo.txt";
 
         // reads commitInfo.txt
         ifstream file(path.string());
@@ -132,14 +132,14 @@ public:
     void writeNextCommitID(string _commitID)
     {
         setNextCommitID(_commitID);
-        auto path = filesystem::current_path() / ".git" / "commits" / getCommitID() / "nextCommitInfo.txt";
+        auto path = filesystem::current_path() / ".vcs" / "commits" / getCommitID() / "nextCommitInfo.txt";
         ofstream write(path.string());
         write << _commitID;
     }
 
     string checkNextCommitID()
     {
-        filesystem::path tempPath(filesystem::current_path() / ".git" / "commits" / getCommitID() / "nextCommitInfo.txt");
+        filesystem::path tempPath(filesystem::current_path() / ".vcs" / "commits" / getCommitID() / "nextCommitInfo.txt");
         bool exists = filesystem::exists(tempPath);
         if (exists)
         {
@@ -167,7 +167,7 @@ private:
 
     bool checkHead()
     {
-        auto tempDir = filesystem::current_path() / ".git" / "commits" / "0x1111";
+        auto tempDir = filesystem::current_path() / ".vcs" / "commits" / "0x1111";
         return filesystem::exists(tempDir);
     }
 
@@ -274,7 +274,7 @@ public:
         while (currNode != NULL)
         {
             string nextCommitId = currNode->checkNextCommitID();
-            filesystem::path commitPath(filesystem::current_path() / ".git" / "commits" / currNode->getCommitID() / "commitInfo.txt");
+            filesystem::path commitPath(filesystem::current_path() / ".vcs" / "commits" / currNode->getCommitID() / "commitInfo.txt");
             string info;
             ifstream file(commitPath.string());
             while (getline(file, info))

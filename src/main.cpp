@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "header_files/git_class.h"
+#include "header_files/vcs_class.h"
 using namespace std;
 
 #define RED  "\x1B[31m"
@@ -13,89 +13,89 @@ using namespace std;
 #define END  "\033[0m"
 
 int main(int argc, char *argv[]) {
-    gitClass gitClassObj;
+    vcsClass vcsClassObj;
     if(argc >= 2) {
         string argument = string(argv[1]);
-        //git init
+        //vcs init
         if (argument == "init") {
-            gitClassObj.gitInit();
-            cout <<GRN "git repository initialized successfully!" END<< endl;
+            vcsClassObj.vcsInit();
+            cout <<GRN "vcs repository initialized successfully!" END<< endl;
         }
-        //git add
+        //vcs add
         else if (argument == "add") {
             if(argc == 2) {     
                 cout << RED "missing arguments!" <<endl;
                 cout << "Provide a third argument e.g." << endl;
-                cout << "git add <'.' | 'file_name'>" END << endl;
+                cout << "vcs add <'.' | 'file_name'>" END << endl;
             }
             if(argc >= 3) {
                 if(argc == 3) {
                     string argumentC = string(argv[2]);
                     if (argumentC == ".")
-                        gitClassObj.gitAdd();
+                        vcsClassObj.vcsAdd();
                     else {
                         string files[1] = {string(argv[2])};
-                        gitClassObj.gitAdd(files, 1);
+                        vcsClassObj.vcsAdd(files, 1);
                     }
                 } else {
                     string files[argc-2];
                     for (int i = 0; i < argc-2; i++)
                         files[i] = string(argv[i]); 
-                    gitClassObj.gitAdd(files, argc-2);
+                    vcsClassObj.vcsAdd(files, argc-2);
                 }
             }
         }
-        //git commit
+        //vcs commit
         else if (argument == "commit")
         {
-            if(argc == 4) {   //[ git, commit, -m, "msg" ]
+            if(argc == 4) {   //[ vcs, commit, -m, "msg" ]
                 string argumentC = string(argv[2]);    
                 string argumentD = string(argv[3]);      
                 if(argumentC == "-m") {
-                    gitClassObj.gitCommit(argumentD);
+                    vcsClassObj.vcsCommit(argumentD);
                     cout << "files commited successfully" << endl;
                 }
             } else {
                 cout << RED "missing arguments!" <<endl;
                 cout << "Provide with a message field e.g." << endl;
-                cout << "git commit -m 'my commit message'" END << endl;
+                cout << "vcs commit -m 'my commit message'" END << endl;
             }
         }
-        // git revert
+        // vcs revert
         else if(argument == "revert") {
             if(argc == 3) {
                 string argumentC = string(argv[2]);
                 if(argumentC == "HEAD") {
-                    gitClassObj.gitRevert(argumentC);
+                    vcsClassObj.vcsRevert(argumentC);
                     cout << "The project is now at HEAD" << endl;
                 } else {
-                    gitClassObj.gitRevert(argumentC);
+                    vcsClassObj.vcsRevert(argumentC);
                     cout << "Reverted to <commit_id> commit" << endl;
                 }
             } else {
                 cout << RED "invalid arguments, should be like: " << endl;
-                cout << "git revert <'HEAD'|'commit_hash'>" END<< endl;
+                cout << "vcs revert <'HEAD'|'commit_hash'>" END<< endl;
             }
         }
-        // //git log
+        // //vcs log
         else if(argument == "log") {
-            gitClassObj.gitLog();
+            vcsClassObj.vcsLog();
         }
-        //git status
+        //vcs status
         // else if(argument == "status")
         // {
-        //     gitClassObj.gitStatus();
+        //     vcsClassObj.vcsStatus();
         // }
         //wrong arguments
         else {
             cout << RED "Invalid arguments" END << endl;
         }
     } else {
-        cout << YEL "git is version control system made by linus Torvalds, this project is a clone of that original system with minimal features \n\n";
+        cout << YEL "vcs is version control system made by linus Torvalds, this project is a clone of that original system with minimal features \n\n";
         cout << "Usage: " << endl;
-        cout << "git init                           ->   initialize an empty git repository in the current dir" << endl;
-        cout << "git add <'.'|'file_name'>          ->   add the files to staging area" << endl;
-        cout << "git commit <m 'commit message'>    ->   commit your staging files" << endl;
-        cout << "git revert <'HEAD'|'commit_hash'>  ->   rollback to a specific commit" END << endl;
+        cout << "vcs init                           ->   initialize an empty vcs repository in the current dir" << endl;
+        cout << "vcs add <'.'|'file_name'>          ->   add the files to staging area" << endl;
+        cout << "vcs commit <m 'commit message'>    ->   commit your staging files" << endl;
+        cout << "vcs revert <'HEAD'|'commit_hash'>  ->   rollback to a specific commit" END << endl;
     }
 }
