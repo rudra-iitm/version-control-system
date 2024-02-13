@@ -39,6 +39,6 @@ Go to the project directory
 ```
 
 <div align="center">
-<img src="https://github.com/Rudra-IITM/version-control-system/blob/main/public/assets/vcs_add.png" align="center" style="width: 100%" />
+<img src="https://github.com/Rudra-IITM/version-control-system/blob/main/public/assets/vcs_add.png" align="center" style="width: 50%, height: 50%" />
 </div> 
 
