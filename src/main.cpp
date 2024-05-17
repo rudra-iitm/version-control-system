@@ -91,7 +91,7 @@ int main(int argc, char *argv[]) {
             cout << RED "Invalid arguments" END << endl;
         }
     } else {
-        cout << YEL "vcs is version control system made by linus Torvalds, this project is a clone of that original system with minimal features \n\n";
+        cout << YEL "vcs is version control system made by rudra, this project is a clone of that original system with minimal features \n\n";
         cout << "Usage: " << endl;
         cout << "vcs init                           ->   initialize an empty vcs repository in the current dir" << endl;
         cout << "vcs add <'.'|'file_name'>          ->   add the files to staging area" << endl;
